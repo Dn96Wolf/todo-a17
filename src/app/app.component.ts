@@ -20,7 +20,7 @@ export interface Tasks {
 })
 
 export class AppComponent {
-  public title:string = 'My app';
+  public title: string = 'My app';
   public name = signal('Danilo');
   public tasks = signal<Tasks[]>([
     {
