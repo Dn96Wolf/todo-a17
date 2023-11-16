@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+$primary:#7E3FF2;
+$complementary:#b3f23f;
+$analogous:#3f5af2;
+$analogous2:#d73ff2;
+$triadic:#f23fb3;
+$triadic2:#f27e3f;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }

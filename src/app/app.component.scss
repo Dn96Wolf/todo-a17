@@ -1,117 +1,194 @@
-.todo {
-    width: 60%;
-    height: max-content;
-    background-color: rgb(42, 130, 57);
-    padding: 10px;
+@import '../styles.scss';
+
+.todo-app {
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    margin: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary;
 
-    h3 {
-        font-size: 24px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        margin: auto;
-        margin-bottom: 8px;
-    }
-
-    p {
-        margin: auto;
-        margin-top: 0;
-
-    }
-
-    .input {
-        width: max-content;
-        height: 30px;
-        margin: auto;
-        margin-bottom: 20px;
-
-        .field {
-            width: 300px;
-            height: 20px;
-            border: 1px solid transparent;
-            border-radius: 8px;
-            background-color: black;
-            padding: 8px;
-            color: white;
-        }
-
-        .field:focus {
-            outline: none;
-            border-color: black;
-        }
-
-        ::placeholder {
-            color: white;
-        }
-    }
-
-
-    .tasks-container {
-        width: 80%;
-        padding: 20px;
-        margin: auto;
+    .todo {
+        width: 60%;
         height: max-content;
-        border-radius: 12px;
-        background-color: black;
+        background: rgb(2, 0, 36);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        border-radius: 8px;
 
-        .task {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+        h3 {
+            font-size: 24px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin: auto;
             margin-bottom: 8px;
-            position: relative;
-            .marker {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                border: 2px solid gainsboro;
-                margin-right: 8px;
-                &.active{
-                    border-color: aqua;
-                    background-color: aqua;
+            color: $complementary;
+            font-weight: 700;
+        }
+
+        p {
+            margin: auto;
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: $complementary;
+            font-weight: 600;
+        }
+
+        .input {
+            width: max-content;
+            height: 40px;
+            margin: auto;
+            margin-bottom: 20px;
+
+            .field {
+                width: 300px;
+                height: 40px;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                background-color: white;
+                padding: 8px;
+                color: black;
+            }
+
+            .field:focus {
+                outline: none;
+                border-color: $primary;
+            }
+
+            ::placeholder {
+                color: gray;
+            }
+        }
+
+
+        .tasks-container {
+            width: 80%;
+            padding: 20px;
+            margin: auto;
+            height: max-content;
+            border-radius: 12px;
+            background-color: black;
+            margin-bottom: 20px;
+
+            .task {
+                width: 100%;
+                height: 30px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                position: relative;
+
+                .marker {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    border: 2px solid $complementary;
+                    margin-right: 8px;
+                    margin-bottom: 0;
+
+                    &.active {
+                        border-color: $complementary;
+                        background-color: $complementary;
+                    }
+                }
+
+                .name-task {
+                    width: calc(100% - 20px);
+                    color: white;
+                    margin-bottom: 0;
+                    &.active {
+                        text-decoration: line-through;
+                    }
+                }
+
+                .close {
+                    width: 14px;
+                    height: 14px;
+                    margin: auto;
+                    background-color:transparent;
+                    img{
+                        margin: auto;
+                        filter: invert(100%);
+                    }
+
+                    img:hover{
+                        cursor: pointer;
+                        filter: invert(50%);
+                    }
+
                 }
             }
 
-            .name-task{
-                width: calc(100% - 20px);
-                color: white;
+            .edit-task {
+                width: 100%;
+                height: 35px;
+                margin: auto;
+                padding: 8px 27px;
+                margin-bottom: 10px;
+                input {
+                    border: none;
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    background-color: black;
+                    color: white;
+                    font-size: 16px;
+                    margin-bottom: 10px;
+
+                }
+
+                ::placeholder {
+                    color: white;
+                }
+            }
+        }
+
+        .remaining {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .items {
+                display: flex;
+                flex-direction: row;
+
+                .pendientes {
+                    margin-right: 5px;
+                }
             }
 
-            .close{
-                width: 10px;
-                height: 10px;
-                background-color: azure;
+            .actions {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+
+                p {
+                    width: max-content;
+                    padding: 8px;
+                }
+
+                p:hover{
+                    cursor: pointer;
+                    border: 1px solid $complementary;
+                    border-radius: 8px;
+
+                }
+
             }
+
+       
         }
     }
 
-    .remaining{
-        width: 100%;
-        height: 40px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+}
 
-        .items{
-            display: flex;
-            flex-direction: row;
-            .pendientes{
-                margin-right: 5px;
-            }
-        }
 
-        .actions{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            p{
-                width: max-content;
-                padding: 0 8px;
-            }
-
-        }
-    }
+.box {
+    transition: width 1s ease-in-out;
 }
