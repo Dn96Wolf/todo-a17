@@ -1,0 +1,11 @@
+<section>
+    <h1>{{'Lista de tareas'}}</h1>
+    <p>{{'Todas mis tareas en un solo lugar'}}</p>
+
+    <div>
+        <div *ngFor="let item of tasks()">
+            <p> {{ item }}</p>
+        </div>
+    </div>
+
+</section>

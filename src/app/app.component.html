@@ -1,0 +1,32 @@
+<section class="todo">
+  <h3>My Day</h3>
+  <p>All my tasks in one place</p>
+
+  <div class="input">
+    <input class="field" type="text" placeholder="Type new todo" (change)="addNewElement($event)">
+  </div>
+
+  <div class="tasks-container">
+    <div class="task" *ngFor="let task of tasks(); index as i">
+      <p class="marker" [class.active]="task.completed" (click)="completed(i)"></p>
+      <p class="name-task"> {{task.title}} </p>
+      <div class="close" (click)="removeItem(i)">
+        <img src alt>
+      </div>
+    </div>
+  </div>
+
+  <div class="remaining">
+    <div class="items">
+      <p class="pendientes">{{0}}</p>
+      <p>Items left</p>
+    </div>
+
+    <div class="actions">
+      <p *ngFor="let action of actions; index as i">
+        {{action}}
+      </p>
+    </div>
+
+  </div>
+</section>
