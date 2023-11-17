@@ -48,12 +48,11 @@
       </div>
 
       <div class="actions">
-        <p *ngFor="let action of actions; index as i"
-          (click)="changeFilter(action)">
+        <p *ngFor="let action of actions; index as i" [class.active-filter]="filterActive === i"
+          (click)="changeFilter(action,i)">
           {{action}}
         </p>
-
-        <p>
+        <p (click)="deleteCompleted()">
           {{ 'Clear completed' }}
         </p>
       </div>

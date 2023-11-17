@@ -209,3 +209,9 @@
 .box {
     transition: width 1s ease-in-out;
 }
+
+
+.active-filter{
+    border: 1px solid $complementary;
+    border-radius: 8px;
+}

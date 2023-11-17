@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, Injector, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ export interface Tasks {
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title: string = 'My app';
   public name = signal('Danilo');
   public tasks = signal<Tasks[]>([
@@ -54,13 +54,15 @@ export class AppComponent {
     validators: [Validators.required],
   });
 
-  public newWidth = signal(300);
-  public filterState = signal('all');
+  public newWidth = signal<number>(300);
+  public filterState = signal<string>('all');
+  public filterActive: number = 0;
   public taskByFilter = computed(() => {
     //elementos que reaccionan cuando uno u otro cambia.
     //queda un nuevo estado a partir de los estados vigialdos dentro 
     //de esta funcion.
     //todo lo que cambien dentro de las senales
+    //computed siempre retorna una nueva senal a partir de otra
     const filter = this.filterState();
     const task = this.tasks();
     if (filter === 'pending') {
@@ -74,6 +76,37 @@ export class AppComponent {
 
   public actions = ['All', 'Pending', 'Completed'];
   public taskMarked: number | null = null;
+
+  injector = inject(Injector);
+
+  constructor() {
+    //efect es un vigilante de reactividad 
+    //cuando una senal cambia se ejecuta algo en particular pero no regresa un valor
+  }
+
+
+  ngOnInit(): void {
+    const tasks = localStorage.getItem('tasks');
+    if (tasks) {
+      const listTasks = JSON.parse(tasks);
+      this.tasks.set(listTasks);
+    }
+    this.trackTasks();
+  }
+
+  public trackTasks() {
+    //efect es un vigilante de reactividad 
+    //cuando una senal cambia se ejecuta algo en particular pero no regresa un valor
+    effect(() => {
+      const task = this.tasks();
+      //cada que pongamos una senal este la detecta y actua
+      localStorage.setItem('tasks', JSON.stringify(task));
+    }, { injector: this.injector })
+    //en este caso se usa el injector del core para cuando no se 
+    //agrega el effect dentro del costructor 
+  }
+
+
   public changeHandler(algo: Event) {
     const input = algo.target as HTMLInputElement;
     const newValue = input.value;
@@ -149,9 +182,12 @@ export class AppComponent {
   }
 
 
-  public changeFilter(state: string): void {
-    console.log('el estado', state)
+  public changeFilter(state: string, index: number): void {
+    this.filterActive = index;
     this.filterState.set(state.toLowerCase());
+  }
+
+  public deleteCompleted(): void {
   }
 
 }
