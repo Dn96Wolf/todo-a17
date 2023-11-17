@@ -20,11 +20,10 @@ export interface Tasks {
 
 export class AppComponent implements OnInit {
   public title: string = 'My app';
-  public name = signal('Danilo');
   public tasks = signal<Tasks[]>([
     {
       id: Date.now(),
-      title: 'Crear proyecto',
+      title: 'Tarea 1',
       completed: true,
       editing: false
     },
@@ -34,13 +33,6 @@ export class AppComponent implements OnInit {
       completed: false,
       editing: false
     },
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false,
-      editing: false
-    },
-
   ]);
 
   public newTaskCtrl = new FormControl('', {
@@ -103,13 +95,6 @@ export class AppComponent implements OnInit {
     }, { injector: this.injector })
     //en este caso se usa el injector del core para cuando no se 
     //agrega el effect dentro del costructor 
-  }
-
-
-  public changeHandler(algo: Event) {
-    const input = algo.target as HTMLInputElement;
-    const newValue = input.value;
-    this.name.set(newValue);
   }
 
   public completed(index: number) {
@@ -187,6 +172,7 @@ export class AppComponent implements OnInit {
   }
 
   public deleteCompleted(): void {
+    this.tasks.update((lastState) => lastState.filter((task:Tasks) => !task.completed));
   }
 
 }
