@@ -1,8 +1,7 @@
 import { Component, Injector, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { retry, single } from 'rxjs';
 
 export interface Tasks {
   id: number,

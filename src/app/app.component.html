@@ -11,7 +11,7 @@
         [formControl]="newTaskCtrl" (keydown.enter)="addNewElement()">
     </div>
 
-    <div class="tasks-container">
+    <div class="tasks-container style-scrollbar">
       <div *ngFor="let task of taskByFilter(); index as i">
 
         <div *ngIf="!task.editing; else field" class="task"
@@ -37,7 +37,7 @@
     <div class="remaining">
       <div class="items">
         <p class="pendientes">{{ taskByFilter().length }}</p>
-        <p *ngIf="taskByFilter().length > 1; else plural">Items</p>
+        <p class="text" *ngIf="taskByFilter().length > 1; else plural">Items</p>
 
         <ng-template #plural>
           <p>
