@@ -99,6 +99,14 @@
 
             }
 
+            .no-items{
+                width: 100%;
+                p{
+                    width: max-content;
+                    margin: auto;
+                }
+            }
+
             .task {
                 width: 100%;
                 height: 50px;

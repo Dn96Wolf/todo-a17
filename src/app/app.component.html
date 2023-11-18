@@ -12,26 +12,36 @@
     </div>
 
     <div class="tasks-container style-scrollbar">
-      <div *ngFor="let task of taskByFilter(); index as i">
 
-        <div *ngIf="!task.editing; else field" class="task"
-          (dblclick)="editTask(i)">
-          <p class="marker" [class.active]="task.completed"
-            (click)="completed(i)"></p>
-          <p class="name-task" [class.active]="task.completed"> {{task.title}}
-          </p>
-          <div class="close" (click)="removeItem(i)">
-            <img style="width: 100%; height: 100%;" src="/assets/icons/close.png" alt="">
-          </div>
+      @for(task of taskByFilter(); track task; let i = $index){
+
+      @if (!task.editing) {
+      <div class="task"
+        (dblclick)="editTask(i)">
+        <p class="marker" [class.active]="task.completed"
+          (click)="completed(i)"></p>
+        <p class="name-task" [class.active]="task.completed"> {{task.title}}
+        </p>
+        <div class="close" (click)="removeItem(i)">
+          <img style="width: 100%; height: 100%;" src="/assets/icons/close.png"
+            alt>
         </div>
-
-        <ng-template #field>
-          <div class="edit-task">
-            <input type="text" autofocus placeholder="Edit task"
-              [value]="task.title" (keyup.enter)="newValueTask(i,$event)">
-          </div>
-        </ng-template>
       </div>
+      } @else{
+      <div class="edit-task">
+        <input type="text" autofocus placeholder="Edit task"
+          [value]="task.title" (keyup.enter)="newValueTask(i,$event)">
+      </div>
+      }
+
+      } @empty {
+        <div class="no-items">
+            <p>
+              No hay tareas para completar!, agrega algunas!
+            </p>
+        </div>
+      }
+
     </div>
 
     <div class="remaining">
@@ -48,10 +58,15 @@
       </div>
 
       <div class="actions">
-        <p *ngFor="let action of actions; index as i" [class.active-filter]="filterActive === i"
+
+        @for (action of actions; track action; let i = $index) {
+        <p
+          [class.active-filter]="filterActive === i"
           (click)="changeFilter(action,i)">
           {{action}}
         </p>
+        }
+
         <p (click)="deleteCompleted()">
           {{ 'Clear completed' }}
         </p>
